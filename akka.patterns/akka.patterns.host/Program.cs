@@ -1,13 +1,16 @@
 ﻿using Akka.Actor;
 using Akka.Cluster.Sharding;
+using Akka.Cluster.Tools.PublishSubscribe;
 using Akka.Cluster.Tools.Singleton;
 using Akka.Configuration;
 using Akka.Event;
+using Akka.Persistence;
 using Serilog;
 using Serilog.Debugging;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Topshelf;
 
 namespace akka.patterns.host
@@ -68,12 +71,24 @@ namespace akka.patterns.host
             var sharding = ClusterSharding.Get(system);
             var shardingSettings = sharding.Settings;
 
-            sharding.Start(
+            var rend1 = sharding.Start(
                 settings: shardingSettings,
-                messageExtractor: new PersonCommandExtractor(),
-                entityProps: Props.Create<Person>(),
-                typeName: "person"
+                messageExtractor: new EntityExtractor(),
+                entityProps: Props.Create<RendezvousActor>(),
+                typeName: "RendezvousActor"
                 );
+
+            var pubsub = DistributedPubSub.Get(system);
+            var mediator = pubsub.Mediator;
+            mediator.Tell(new Subscribe("domainevents", rend1));
+
+            //mediator.Tell(new Publish("topic-name", new MyMessage()));
+
+            //system.EventStream.Subscribe(rend1, typeof(EventArgs1));
+            //system.EventStream.Subscribe(rend1, typeof(EventArgs2));
+
+            Task.Factory.StartNew(async () => { await Task.Delay(5000); mediator.Tell(new Publish("domainevents", new EventArgs1())); });
+            Task.Factory.StartNew(async () => { await Task.Delay(10000); mediator.Tell(new Publish("domainevents", new EventArgs2())); });
 
             return true;
         }
@@ -99,86 +114,63 @@ namespace akka.patterns.host
         }
     }
 
-    public class PersonCommandExtractor : HashCodeMessageExtractor
+    public class EventArgs1 : EventArgs, IEntity
     {
-        public PersonCommandExtractor() : base(30)
+        public Guid Oid { get; set; }
+    }
+
+    public class EventArgs2 : EventArgs, IEntity
+    {
+        public Guid Oid { get; set; }
+    }
+
+    public class EntityExtractor : HashCodeMessageExtractor
+    {
+        public EntityExtractor() : base(30)
         {
         }
 
         public override object EntityMessage(object message)
         {
-            return message as Person.ChangeName;
+            return message;
         }
 
         public override string EntityId(object message)
         {
-            var command = message as Person.ChangeName;
-            return $"{command?.Id:n}";
+            return message.GetHashCode().ToString();
         }
     }
 
-    public class Person : UntypedActor
+    public interface IEntity
     {
-        public class ChangeName
+        Guid Oid { get; }
+    }
+
+    public class RendezvousActor : PersistentActor, IEntity
+    {
+        public RendezvousActor()
         {
-            public ChangeName(Guid id, string name)
-            {
-                Id = id;
-                Name = name;
-            }
-
-            public Guid Id { get; private set; }
-
-            public string Name { get; private set; }
+            Oid = Guid.NewGuid();
         }
 
-        public class Shoot
-        {
-            public static readonly Shoot Instance = new Shoot();
-            private Shoot()
-            {
-            }
-        }
+        public Guid Oid { get; set; }
 
-        private string _name;
-        private readonly ILoggingAdapter _log;
-        private TimeSpan _passivateAfter;
-
-        public Person()
+        public override string PersistenceId
         {
-            _passivateAfter = TimeSpan.FromSeconds(3);
-            _log = Context.GetLogger();
-            Context.SetReceiveTimeout(_passivateAfter);
-        }
-
-        protected override void OnReceive(object message)
-        {
-            if (message is ChangeName)
+            get
             {
-                DoNameChange(((ChangeName)message).Name);
-            }
-            if (message is ReceiveTimeout)
-            {
-                Context.Parent.Tell(new Passivate(Shoot.Instance));
-            }
-            if (message is Shoot)
-            {
-                _log.Warning($"Shooting myself. Nobody loves me. My name was {_name}.");
-                Context.Stop(Self);
+                return Oid.ToString();
             }
         }
 
-        private void DoNameChange(string name)
+        protected override bool ReceiveCommand(object message)
         {
-            if (name.Equals(_name, StringComparison.InvariantCultureIgnoreCase))
-            {
-                _log.Warning($"Can't change name.");
-            }
-            else
-            {
-                _name = name;
-                _log.Info($"Name changed to {name}.");
-            }
+            return true;
+        }
+
+        protected override bool ReceiveRecover(object message)
+        {
+            return true;
         }
     }
 }
