@@ -74,6 +74,19 @@ Sentinel Pattern
 
 https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/
 
+Use Immutable Messages with Immutable Data
+
+    The reasons for this are the same as stabilizing a variable before using it in a future—you
+    don’t know when the other actor will actually handle the message or what the value of the
+    variable will be at that time. The same goes for when you want to send an immutable value
+    that contains mutable attributes.
+    Erlang does this for you with copy on write (COW) semantics, but we don’t get that for free
+    in the JVM. Assuming your application has the heap space, take advantage of it.
+    Hopefully, these copies will be short-lived allocations that never leave the Eden space of
+    your garbage collection generations, and the penalty for having duplicated the value will be minimal.
+    
+also see: http://hackerboss.com/i-have-seen-the-future-and-it-is-copy-on-write/
+
 ## Stashing Patterns
 
 http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
