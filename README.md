@@ -57,6 +57,12 @@ Superviser-Only Pattern
     +--+------+     +-------+--+         +----+-----+         +--------+--+
     | child 1 |     | child 2  |         | child 3  |         | child 4   |
     +---------+     +----------+         +----------+         +-----------+
+    
+also see http://getakka.net/docs/concepts/supervision
+
+    At this point it is vital to understand that supervision is about forming a recursive fault
+    handling structure. If you try to do too much at one level, it will become hard to reason about,
+    hence the recommended way in this case is to add a level of supervision.
 
 Sentinel Pattern
 
