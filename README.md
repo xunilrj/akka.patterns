@@ -38,3 +38,22 @@ Petabridge also have a post about this pattern, but have called it https://petab
     It’s often cheaper, faster, and more reliable to simply delegate these risky operations to a purpose-built,
     but trivially disposable actor whose only job is to carry out the operation successfully or die trying.
     These brave, disposable actors are Character Actors.
+
+Superviser-Only Pattern
+
+    introducing a layer of supervision between the
+    [one hierarchy] and [another hierarchy of] children, as we see [below] [...] I can tailor
+    supervision to be specific to failure that can occur with accounts and that which may
+    occur with [a hierarchy].
+    
+                            +---------------+
+                  +---------+   Actor       +-------+
+                  |         +---------------+       |
+                  |                                 |
+         +--------+------+                      +---+---------------+
+       +-+  Supervisor 1 +--+                 +-+ Supervisor 2      +--+
+       | +---------------+  |                 | +-------------------+  |
+       |                    |                 |                        |
+    +--+------+     +-------+--+         +----+-----+         +--------+--+
+    | child 1 |     | child 2  |         | child 3  |         | child 4   |
+    +---------+     +----------+         +----------+         +-----------+
