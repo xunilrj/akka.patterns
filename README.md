@@ -15,7 +15,7 @@ Domain Actors
     cache where the existence of the actors and the state they encapsulate are a view of the
     current state of the application.
     
-Extra Pattern 
+Extra/Cameo Pattern 
 
     One of the most difficult tasks in asynchronous programming is trying to capture con‐
     text so that the state of the world at the time the task was started can be accurately
