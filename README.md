@@ -63,3 +63,7 @@ Sentinel Pattern
     I call these kinds of actors
     “sentinels,” as they guard the system from falling out of synchrony with a known
     expectation of what state should exist in the system.
+
+## Best Practices
+
+https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/
