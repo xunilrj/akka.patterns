@@ -67,3 +67,7 @@ Sentinel Pattern
 ## Best Practices
 
 https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/
+
+## Stashing Patterns
+
+http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
