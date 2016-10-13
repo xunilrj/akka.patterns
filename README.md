@@ -92,3 +92,49 @@ https://www.nuget.org/packages/System.Collections.Immutable/
 ## Stashing Patterns
 
 http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
+
+### Guaranteed Operation between Two Actors
+
+When DDD is applied with Actor based, it is common to model Aggregate Roots with Actors
+see http://pkaczor.blogspot.co.uk/2014/04/reactive-ddd-with-akka.html
+
+To allow horizontal scalability, the ideal is that each Aggregate Root could be running in a different machine. Hence, there is no distributed transaction mechanism to allow modification of two Actors, for example the famous "transfer money between two accounts".
+
+To allow such operation without distributed transaction, one can use the following workflow. 
+
+1 - With just one operation on the Source AccountActor:  
+1.1 - Decrease the account balance (the desired operation)  
+1.2 - Insert that there is an operation in progress (pending operation storage)  
+2 - Persist Source AccountActor;
+2.1 - From this point it is guaranteed that the operation will finish;
+3 - Create a TransferActor to communicate with Destination AccountActor; 
+3.1 - AccountActor must have a mechanism to guarantee that for every operation in progress exist one associated TransferActor (Cameo Pattern);
+4 - TransferActor must send the message to the Destination AccountActor "n" times following some kind of pattern (every x seconds, for example);  
+4.1 - If after n transient errors or a non-transient error, the actor can enter in a human-attention-needed state (maybe the destination account does not exist);  
+5 - TransferActor enter in Wait-for-confirmation state;  
+6 - Destination AccountActor will receive the message and do something: or will accept the tranfer or will ask the Account Manager if the money must be accepted, for example;
+7 - After the transfer is accepted, Destination AccountActor will send the confirmation that the Transfer was accepted to the TransferActor;  
+8 - TransferActor will send a message to its parent telling that the transfer was accepted and will kill itself;  
+9 - Source AccountActor will remove the operation from the  in-progress-list;
+10 - Operation finished!
+
+This complex workflow guarantees that the operation will be completed even with the following errors:  
+1 - Source AccountActor modified its data but could not start the TransferActor;  
+1.1 - The Source AccountActor have a auto-healing mechanism to always have a TransferActor to each operation-in-progress. So eventually the TransferActor will be started;
+1.2 - If for some reason the application died, when the application start again, the AccountActor will create the TransferActor for each operation-in-progress;  
+2 - TransferActor started but somehow died;  
+2.1 - Transient errors will be handled by the retry mechanism;  
+2.2 - Non-transient errors will scalate to human intervention;  
+2.3 - If some reason the TransferActor vanished, the AccountActor-auto-healing-mechanism will recreate it.  
+3 - Source TransferActor cannot communicate with the Destination AccountActor  
+3.1 - Transient errors will be handled by the retry mechanism;  
+1.2 - Non-transient errors will scalate to human intervention;  
+4 - Destination AccountActor accepted the transfer, persisted its data, but died after that;  
+4.1 - The Source TransferActor will resend the message after some time;
+4.1 - Destination AccountActor must be able to recognize that a tranfer was already accepted (must idempotently process this message). So if it died before sending the confirmation the Source TransferActor will resend the request and the Destination AccountActor will confirm the transfer without doing any data modification.  
+5 - The TransferActor died between waiting the confirmation and sending the confirmation to its parent  
+5.1 - The Source AccountActor will recreat it, the TransferActor will send the request again, the destination AccountActor will just confirm it;  
+6 - The TransferActor have sent the confirmation to the AccountActor and killed itself but the AccountActor have not persisted the operation in progress updated  
+6.1 - The AccountActor auto-healing-mechanism will start the whole process again until everything works.  
+
+//TODO push the working code.
