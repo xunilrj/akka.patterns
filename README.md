@@ -57,3 +57,9 @@ Superviser-Only Pattern
     +--+------+     +-------+--+         +----+-----+         +--------+--+
     | child 1 |     | child 2  |         | child 3  |         | child 4   |
     +---------+     +----------+         +----------+         +-----------+
+
+Sentinel Pattern
+
+    I call these kinds of actors
+    “sentinels,” as they guard the system from falling out of synchrony with a known
+    expectation of what state should exist in the system.
