@@ -85,7 +85,9 @@ Use Immutable Messages with Immutable Data
     Hopefully, these copies will be short-lived allocations that never leave the Eden space of
     your garbage collection generations, and the penalty for having duplicated the value will be minimal.
     
-also see: http://hackerboss.com/i-have-seen-the-future-and-it-is-copy-on-write/
+also see:
+http://hackerboss.com/i-have-seen-the-future-and-it-is-copy-on-write/  
+https://www.nuget.org/packages/System.Collections.Immutable/
 
 ## Stashing Patterns
 
