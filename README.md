@@ -144,4 +144,13 @@ This complex workflow guarantees that the operation will be completed even with 
 6 - The TransferActor have sent the confirmation to the AccountActor and killed itself but the AccountActor have not persisted the operation in progress updated  
 6.1 - The AccountActor auto-healing-mechanism will start the whole process again until everything works.  
 
+### Bulkhead Pattern
+
+    how to use dispatchers
+    to create failure zones and prevent failure in one part of the application from affecting
+    another. This is sometimes called the Bulkhead Pattern. And once I create the failure
+    zones, how do I size the thread pools so that we get the best performance from the least
+    amount of system resources used?
+    
+also see: http://skife.org/architecture/fault-tolerance/2009/12/31/bulkheads.html
 //TODO push the working code.
