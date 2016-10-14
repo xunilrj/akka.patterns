@@ -89,6 +89,13 @@ also see:
 http://hackerboss.com/i-have-seen-the-future-and-it-is-copy-on-write/  
 https://www.nuget.org/packages/System.Collections.Immutable/
 
+Immutability in c# is Hard
+
+https://blogs.msdn.microsoft.com/lucabol/2007/12/03/creating-an-immutable-value-object-in-c-part-i-using-a-class/
+
+Comparison between c# and f# for Immutability
+http://www.slideshare.net/ScottWlaschin/domain-driven-design-with-the-f-type-system-functional-londoners-2014
+
 ## Stashing Patterns
 
 http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
