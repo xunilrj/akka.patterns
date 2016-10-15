@@ -153,4 +153,15 @@ This complex workflow guarantees that the operation will be completed even with 
     amount of system resources used?
     
 also see: http://skife.org/architecture/fault-tolerance/2009/12/31/bulkheads.html
+
+
+From 
+## Reactive Enterprise with Actor Model: Applications and Integration in Scala and Akka
+https://www.amazon.de/Reactive-Enterprise-Actor-Model-Applications/dp/0133846830
+
+Domain Supervision Actor
+
+    The domainModel actor serves as parent and supervisor for categories of
+    domain model of concepts [IDDD]
+    
 //TODO push the working code.
