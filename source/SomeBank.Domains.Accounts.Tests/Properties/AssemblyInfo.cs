@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("akka.patterns.host")]
+[assembly: AssemblyTitle("SomeBank.Domains.Accounts.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("akka.patterns.host")]
+[assembly: AssemblyProduct("SomeBank.Domains.Accounts.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1edef7d2-aa5e-4ceb-83c4-4418785ed103")]
+[assembly: Guid("da1e8021-9143-4c40-9d8c-04417aa6393a")]
 
 // Version information for an assembly consists of the following four values:
 //
