@@ -164,4 +164,15 @@ Domain Supervision Actor
     The domainModel actor serves as parent and supervisor for categories of
     domain model of concepts [IDDD]
     
+Guaranteed Sender Actor
+
+    By definition, when using Actor Model, messages are delivered to an actor at most once.
+    For many uses this all works out just fine, especially when considering that any given
+    message is almost always successfully delivered. As well, when a given message is not
+    actually delivered, there are ways to make sure that it is eventually. For example, the
+    sending actor can listen for a response to its sent message, and also set a timeout. If the
+    timeout fires before the response is received, the client actor will simply resend the
+    message. In the case of a crash, possibly restart the receiving actor before it sends the
+    repeat message.
+    
 //TODO push the working code.
