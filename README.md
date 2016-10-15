@@ -1,21 +1,45 @@
-# akka.patterns
-A sandbox of akka patterns
+# Akka.NET sandbox
 
-## From Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
+Example of application built using Akka.net. Please Expect WIP code-quality.
 
-Workers Actors
+## Stack
+
+### Frontend  
+Still missing
+
+### Backend  
+C#  
+Topshelf  
+Akka.Net
+Serilog  
+
+### Domain Model  
+F#  
+Chessie
+
+### Persistence
+Still missing
+
+### Build + DevOps  
+Still missing
+
+## Interesting Akka Patterns and References
+
+### Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
+
+#### Workers Actors
 
     worker actors are meant for parallelization or separation of dangerous tasks into
     actors built specifically for that purpose, and the data upon which they will act is always
     provided to them. 
 
-Domain Actors
+#### Domain Actors
 
     Domain actors, introduced in the previous section, represent a live
     cache where the existence of the actors and the state they encapsulate are a view of the
     current state of the application.
     
-Extra Pattern 
+#### Extra Pattern 
 
     One of the most difficult tasks in asynchronous programming is trying to capture con‐
     text so that the state of the world at the time the task was started can be accurately
@@ -23,7 +47,7 @@ Extra Pattern
     Akka actors is a very simple and lightweight solution for capturing the context at the
     time the message was handled to be utilized when the tasks are successfully completed.
     
-Cameo Pattern
+#### Cameo Pattern
 
     Those are good reasons for pulling the type you’re creating with the Extra Pattern into
     a pre-defined type of actor, where you create an instance of that type for every message
@@ -39,7 +63,7 @@ Petabridge also have a post about this pattern, but have called it https://petab
     but trivially disposable actor whose only job is to carry out the operation successfully or die trying.
     These brave, disposable actors are Character Actors.
 
-Superviser-Only Pattern
+#### Superviser-Only Pattern
 
     introducing a layer of supervision between the
     [one hierarchy] and [another hierarchy of] children, as we see [below] [...] I can tailor
@@ -64,7 +88,7 @@ also see http://getakka.net/docs/concepts/supervision
     handling structure. If you try to do too much at one level, it will become hard to reason about,
     hence the recommended way in this case is to add a level of supervision.
 
-Sentinel Pattern
+#### Sentinel Pattern
 
     I call these kinds of actors
     “sentinels,” as they guard the system from falling out of synchrony with a known
@@ -96,7 +120,9 @@ https://blogs.msdn.microsoft.com/lucabol/2007/12/03/creating-an-immutable-value-
 Comparison between c# and f# for Immutability
 http://www.slideshare.net/ScottWlaschin/domain-driven-design-with-the-f-type-system-functional-londoners-2014
 
-## Stashing Patterns
+### Akka Documentation
+
+####  Stashing Patterns
 
 http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
 
@@ -158,17 +184,15 @@ Guaranteed Receiver Actor
     
 also see: http://skife.org/architecture/fault-tolerance/2009/12/31/bulkheads.html
 
-
-From 
-## Reactive Enterprise with Actor Model: Applications and Integration in Scala and Akka
+### Reactive Enterprise with Actor Model: Applications and Integration in Scala and Akka
 https://www.amazon.de/Reactive-Enterprise-Actor-Model-Applications/dp/0133846830
 
-Domain Supervision Actor
+#### Domain Supervision Actor
 
     The domainModel actor serves as parent and supervisor for categories of
     domain model of concepts [IDDD]
     
-Guaranteed Sender Actor
+#### Guaranteed Sender Actor
 
     By definition, when using Actor Model, messages are delivered to an actor at most once.
     For many uses this all works out just fine, especially when considering that any given
@@ -180,4 +204,3 @@ Guaranteed Sender Actor
     repeat message.
     
 also see: http://getakka.net/docs/persistence/at-least-once-delivery
-//TODO push the working code.
