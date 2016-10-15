@@ -142,7 +142,11 @@ This complex workflow guarantees that the operation will be completed even with 
 5 - The TransferActor died between waiting the confirmation and sending the confirmation to its parent  
 5.1 - The Source AccountActor will recreat it, the TransferActor will send the request again, the destination AccountActor will just confirm it;  
 6 - The TransferActor have sent the confirmation to the AccountActor and killed itself but the AccountActor have not persisted the operation in progress updated  
-6.1 - The AccountActor auto-healing-mechanism will start the whole process again until everything works.  
+6.1 - The AccountActor auto-healing-mechanism will start the whole process again until everything works.
+
+see:
+Guaranteed Sender Actor
+Guaranteed Receiver Actor
 
 ### Bulkhead Pattern
 
@@ -175,4 +179,5 @@ Guaranteed Sender Actor
     message. In the case of a crash, possibly restart the receiving actor before it sends the
     repeat message.
     
+also see: http://getakka.net/docs/persistence/at-least-once-delivery
 //TODO push the working code.
