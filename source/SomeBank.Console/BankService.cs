@@ -1,12 +1,12 @@
 ﻿using Akka.Actor;
 using akkatest.Areas;
 using Serilog;
-using SomeBank.AkkaUtils.Actors;
-using SomeBank.Domains.Accounts.Commands;
+using SomeBank.Accounts.AkkaNet.Actors;
+using SomeBank.AkkaNet.Actors;
 
-namespace akkatest
+namespace SomeBank.Console
 {
-    class BankService
+    class SomeBankService
     {
         ActorSystem ActorSystem;
         IActorRef Application;

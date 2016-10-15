@@ -1,6 +1,6 @@
 ﻿using Akka.Actor;
 
-namespace SomeBank.AkkaUtils.Actors
+namespace SomeBank.AkkaNet.Actors
 {
     public abstract class AggregateRootActor : ReceiveActor
     {

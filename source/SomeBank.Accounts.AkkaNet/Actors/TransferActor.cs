@@ -1,7 +1,6 @@
 ﻿using Akka.Actor;
-using SomeBank.Domains.Accounts.Commands;
 
-namespace SomeBank.Domains.Accounts.Actors
+namespace SomeBank.Accounts.AkkaNet.Actors
 {
     class TransferActor : ReceiveActor
     {

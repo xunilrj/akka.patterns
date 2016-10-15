@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SomeBank.Domains.Accounts {
+namespace SomeBank.Accounts.AkkaNet {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SomeBank.Domains.Accounts {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SomeBank.Domains.Accounts.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SomeBank.Accounts.AkkaNet.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,6 +1,6 @@
 ﻿using Topshelf;
 
-namespace akkatest
+namespace SomeBank.Console
 {
     class Program
     {
@@ -8,15 +8,15 @@ namespace akkatest
         {
             HostFactory.Run(x =>                                
             {
-                x.Service<BankService>(s =>                       
+                x.Service<SomeBankService>(s =>                       
                 {
-                    s.ConstructUsing(name => new BankService());  
+                    s.ConstructUsing(name => new SomeBankService());  
                     s.WhenStarted(tc => tc.Start());            
                     s.WhenStopped(tc => tc.Stop());             
                 });
                 x.RunAsLocalSystem();                           
 
-                x.SetDescription("SomeBank Domain Windows Service");       
+                x.SetDescription("SomeBank Domain Service");       
                 x.SetDisplayName("SomeBankDomainService");                      
                 x.SetServiceName("SomeBankDomainService");                      
             });                                                         

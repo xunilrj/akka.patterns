@@ -1,6 +1,6 @@
 ﻿using Akka.Actor;
 
-namespace SomeBank.AkkaUtils.Actors
+namespace SomeBank.AkkaNet.Actors
 {
     public class SupervisorActor : UntypedActor
     {

@@ -1,4 +1,4 @@
-﻿namespace SomeBank.Domains.Accounts.Commands
+﻿namespace SomeBank.Accounts.AkkaNet.Actors
 {
     public class CreateAccountCommand
     {

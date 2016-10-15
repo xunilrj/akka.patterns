@@ -1,10 +1,9 @@
 ﻿using Akka.Actor;
-using SomeBank.AkkaUtils.Actors;
-using SomeBank.Domains.Accounts.Commands;
 using Chessie.ErrorHandling.CSharp;
-using static SomeBank.Accounts;
+using SomeBank.AkkaNet.Actors;
+using static SomeBank.Accounts.Domain;
 
-namespace SomeBank.Domains.Accounts.Actors
+namespace SomeBank.Accounts.AkkaNet.Actors
 {
     class AccountActor : AggregateRootActor
     {

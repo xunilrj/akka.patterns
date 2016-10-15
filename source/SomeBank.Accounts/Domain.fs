@@ -1,4 +1,4 @@
-﻿module SomeBank.Accounts
+﻿module SomeBank.Accounts.Domain
 
 module OutgoingPendingOperation =
     open Chessie.ErrorHandling

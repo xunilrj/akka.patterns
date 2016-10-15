@@ -62,21 +62,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\AccountDataTests.TransferFrom.cs" />
-    <Compile Include="Data\AccountDataTests.TransferTo.cs" />
-    <Compile Include="Data\AccountDataTests.Creation.cs" />
+    <Compile Include="Domain\AccountDataTests.TransferFrom.cs" />
+    <Compile Include="Domain\AccountDataTests.TransferTo.cs" />
+    <Compile Include="Domain\AccountDataTests.Creation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SomeBank.AkkaUtils\SomeBank.AkkaNet.csproj">
-      <Project>{40AE9C50-7C3B-4840-A46D-74ECBC4B6605}</Project>
-      <Name>SomeBank.AkkaNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SomeBank.Domains.Accounts.Data\SomeBank.Accounts.fsproj">
+    <ProjectReference Include="..\SomeBank.Accounts\SomeBank.Accounts.fsproj">
       <Project>{bcbe4fd9-30e0-4196-a45e-80d19631e50f}</Project>
       <Name>SomeBank.Accounts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SomeBank.Domains.Accounts\SomeBank.Accounts.AkkaNet.csproj">
+    <ProjectReference Include="..\SomeBank.Accounts.AkkaNet\SomeBank.Accounts.AkkaNet.csproj">
       <Project>{db8356b9-aedc-4ace-b8f2-859c30eeecf3}</Project>
       <Name>SomeBank.Accounts.AkkaNet</Name>
     </ProjectReference>

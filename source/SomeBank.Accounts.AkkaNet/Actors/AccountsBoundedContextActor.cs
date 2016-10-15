@@ -1,8 +1,7 @@
 ﻿using Akka.Actor;
-using SomeBank.AkkaUtils.Actors;
-using SomeBank.Domains.Accounts.Commands;
+using SomeBank.AkkaNet.Actors;
 
-namespace SomeBank.Domains.Accounts.Actors
+namespace SomeBank.Accounts.AkkaNet.Actors
 {
     public class AccountsBoundedContextActor : BoundedContextActor
     {

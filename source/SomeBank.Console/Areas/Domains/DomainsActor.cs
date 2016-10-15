@@ -1,5 +1,5 @@
 ﻿using Akka.Actor;
-using SomeBank.Domains.Accounts.Actors;
+using SomeBank.Accounts.AkkaNet.Actors;
 
 namespace akkatest.Areas
 {

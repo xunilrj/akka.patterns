@@ -7,8 +7,8 @@
     <ProjectGuid>{0CA82D9E-AB9C-4E9C-A09E-D444EAD35885}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>akkatest</RootNamespace>
-    <AssemblyName>akkatest</AssemblyName>
+    <RootNamespace>SomeBank.Console</RootNamespace>
+    <AssemblyName>SomeBank.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -81,13 +81,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SomeBank.AkkaUtils\SomeBank.AkkaNet.csproj">
-      <Project>{40ae9c50-7c3b-4840-a46d-74ecbc4b6605}</Project>
-      <Name>SomeBank.AkkaNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SomeBank.Domains.Accounts\SomeBank.Accounts.AkkaNet.csproj">
+    <ProjectReference Include="..\SomeBank.Accounts.AkkaNet\SomeBank.Accounts.AkkaNet.csproj">
       <Project>{db8356b9-aedc-4ace-b8f2-859c30eeecf3}</Project>
       <Name>SomeBank.Accounts.AkkaNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SomeBank.AkkaNet\SomeBank.AkkaNet.csproj">
+      <Project>{40AE9C50-7C3B-4840-A46D-74ECBC4B6605}</Project>
+      <Name>SomeBank.AkkaNet</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Chessie.ErrorHandling.CSharp;
-using static SomeBank.Accounts;
 using System;
+using static SomeBank.Accounts.Domain;
 
 namespace SomeBank.Domains.Accounts.Tests.Data
 {
