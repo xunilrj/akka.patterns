@@ -25,22 +25,22 @@ Still missing
 
 ## References
 
-Domain-Driven Design: Tackling Complexity in the Heart of Software
+Domain-Driven Design: Tackling Complexity in the Heart of Software  
 https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
 
-Implementing Domain-Driven Design
+Implementing Domain-Driven Design  
 https://www.amazon.com/gp/product/0321834577/
 
-Reactive Messaging Patterns with the Actor Model: Applications and Integration in Scala and Akka
+Reactive Messaging Patterns with the Actor Model: Applications and Integration in Scala and Akka  
 https://www.amazon.com/Reactive-Messaging-Patterns-Actor-Model/dp/0133846830/
 
-Effective Akka
+Effective Akka  
 https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076
 
-Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions
+Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions  
 https://www.amazon.com/Enterprise-Integration-Patterns-Designing-Deploying/dp/0321200683
 
-Pattern-Oriented Software Architecture Volume 1: A System of Patterns
+Pattern-Oriented Software Architecture Volume 1: A System of Patterns  
 https://www.amazon.com/Pattern-Oriented-Software-Architecture-System-Patterns/dp/0471958697
 
 ## Interesting Akka Patterns and References
