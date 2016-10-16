@@ -45,6 +45,39 @@ https://www.amazon.com/Pattern-Oriented-Software-Architecture-System-Patterns/dp
 
 ## DDD Patterns
 
+### Bounded Contexts
+
+From IDDD:
+
+    Shared Kernel: Sharing part of the model [...] can leverage design work or undermine it. [...] 
+    Keep the kernel small. [...] Define a continuous integration process [...]
+    
+    Customer-Supplier Development: When two teams are in an upstream-downstream relationship, 
+    where the upstream team may succeed interdependently of the fate of the downstream team, 
+    [...] Negotiate and budget tasks for downstream requirements so that everyone understands 
+    the commitment and schedule.
+
+    Conformist: When two development teams have an upstream/downstream relationship in which the 
+    upstream team has no motivation to provide for the downstream team’s needs, the downstream 
+    team is helpless. [...] The downstream [...] slavishly adhering to the model of the upstream team.
+    
+    Anticorruption Layer: [...]  when control or communication is not adequate to pull off a 
+    shared kernel, partner, or customer-supplier relationship [...] As a downstream client,
+    create an isolating layer to provide your system with functionality of the upstream system in
+    terms of your own domain model.
+    
+    Open Host Service: Define a protocol that gives access to your subsystem as a set of services.
+    
+    Published Language: The translation between the models of two Bounded Contexts requires a 
+    common language. Use a well-documented shared language that can express the necessary domain
+    information as a common medium of communication [...]
+    
+    Separate Ways: [...] If two sets of functionality have no significant relationship, they can
+    be completely cut loose from each other.
+    
+    Big Ball of Mud: [...] models are mixed and boundaries are inconsistent. Draw a boundary around 
+    the entire mess and designate it a Big Ball of Mud.
+
 ### Aggregates
 
 From IDDD
