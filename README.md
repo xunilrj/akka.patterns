@@ -123,6 +123,13 @@ for a solution see
 Life beyond Distributed Transactions: an Apostate’s Opinion
 http://www.ics.uci.edu/~cs223/papers/cidr07p15.pdf
 
+In the author opininon the best way to scale an app is:
+
+    Scalable Apps Use Uniquely Identified “Entities”
+    Atomic Transactions Cannot Span Entities
+    Messages Are Addressed to Entities
+    Entities Manage Per-Partner State (“Activities”) 
+
 ### Aggregates
 
 From IDDD
