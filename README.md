@@ -65,12 +65,33 @@ From IDDD:
     shared kernel, partner, or customer-supplier relationship [...] As a downstream client,
     create an isolating layer to provide your system with functionality of the upstream system in
     terms of your own domain model.
+    [...]
+    A Domain Service (7) can be defined in the downstream Context for each type of Anticorruption Layer. You may also put an Anticorruption Layer behind a Repository (12) interface. If using REST, a client Domain Service
+    implementation accesses a remote Open Host Service. Server responses produce representations
+    as a Published Language. The downstream Anticorruption Layer translates representations into
+    domain objects of its local Context.
     
     Open Host Service: Define a protocol that gives access to your subsystem as a set of services.
+    [...]
+    This pattern can be implemented as REST-based resources [...] We generally think of 
+    Open Host Service as a remote procedure call (RPC) API, but it can be implemented
+    using message exchange.
     
     Published Language: The translation between the models of two Bounded Contexts requires a 
     common language. Use a well-documented shared language that can express the necessary domain
     information as a common medium of communication [...]
+    [...]
+    This can be implemented [...] as an XML schema. When expressed with REST-based services,
+    the Published Language is rendered as representations of domain concepts. [...] 
+    It is also possible to render representations as Google Protocol Buffers. If you are
+    publishing Web user interfaces, it might also include HTML representations. One advantage 
+    to using REST is that each client can specify its preferred Published Language, 
+    and the resources render representations in the requested content type. REST also has the
+    advantage of producing hypermedia representations, which facilitates HATEOAS.
+    Hypermedia makes a Published Language very dynamic and interactive, enabling clients
+    to navigate to sets of linked resources. The Language may be published using standard 
+    and/or custom media types. A Published Language is also used in an Event-Driven
+    Architecture (4), where Domain Events (8) are delivered as messages to subscribing interested parties.
     
     Separate Ways: [...] If two sets of functionality have no significant relationship, they can
     be completely cut loose from each other.
