@@ -98,6 +98,30 @@ From IDDD:
     
     Big Ball of Mud: [...] models are mixed and boundaries are inconsistent. Draw a boundary around 
     the entire mess and designate it a Big Ball of Mud.
+    
+#### Difficulties that exist because of the loosed-coupled separation between Bounded Context
+
+From [IDDD]
+
+    For example, what would happen if in the [Bounded Context A] user mistakenly unassigns 
+    [User A1] from the [Role A1 in Bounded Context A]? Well, we receive an Event-carrying 
+    notification that indicates that fact, so we use [Service B in Bounded Context B] to disable
+    the [Role B in Bounded Context B] corresponding to [User A1]. Wait. Seconds later the user
+    realizes that she has unassigned the wrong user from the [Role A1 in Bounded Context A],
+    and that she should have unassigned [User A2] instead. So she quickly assigns [user A1] 
+    back to the role and unassigns [User A2]. [...] is everything actually OK?
+    We could be making a bad assumption about this use case. We are assuming that we receive
+    the notifications in the order in which they actually occurred in the [Bounded Context A].
+    Yet, things might not always work out so well. What would happen if, for whatever reason,
+    the notifications [were received in the reverse order]. [User A1] will be stuck in a disabled state,
+    and at best someone will have to patch the data in the [...] database, or the user will have to
+    play some tricks to get the right user reenabled.
+    This can happen, and ironically, it seems to always happen when we overlook the fact
+    that it could happen. So, how do we prevent this?
+
+for a solution see 
+Life beyond Distributed Transactions: an Apostate’s Opinion
+http://www.ics.uci.edu/~cs223/papers/cidr07p15.pdf
 
 ### Aggregates
 
@@ -108,6 +132,8 @@ From IDDD
     See why you should design Aggregates to reference other Aggregates by identity.
     Discover the importance of using eventual consistency outside the Aggregate boundary.
     Learn Aggregate implementation techniques, including Tell, Don’t Ask and Law of Demeter.
+    
+
     
 ### Entities
 
