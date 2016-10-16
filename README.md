@@ -28,7 +28,7 @@ Still missing
 Domain-Driven Design: Tackling Complexity in the Heart of Software  
 https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
 
-Implementing Domain-Driven Design  
+Implementing Domain-Driven Design [IDDD]  
 https://www.amazon.com/gp/product/0321834577/
 
 Reactive Messaging Patterns with the Actor Model: Applications and Integration in Scala and Akka  
@@ -42,6 +42,40 @@ https://www.amazon.com/Enterprise-Integration-Patterns-Designing-Deploying/dp/03
 
 Pattern-Oriented Software Architecture Volume 1: A System of Patterns  
 https://www.amazon.com/Pattern-Oriented-Software-Architecture-System-Patterns/dp/0471958697
+
+## DDD Patterns
+
+### Aggregates
+
+From IDDD
+
+    [...] model true invariants in consistency boundaries according to real business rules.
+    Consider the advantages of designing small Aggregates.
+    See why you should design Aggregates to reference other Aggregates by identity.
+    Discover the importance of using eventual consistency outside the Aggregate boundary.
+    Learn Aggregate implementation techniques, including Tell, Don’t Ask and Law of Demeter.
+    
+### Entities
+
+From IDDD
+
+    Consider why Entities have their proper place when we need to model unique things.
+    See how unique identities may be generated for Entities.
+    Look in on a design session as a team captures its Ubiquitous Language (1) in Entity design.
+    Learn how you can express Entity roles and responsibilities.
+    See examples of how Entities can be validated and how to persist them to storage.
+    
+### Value Objects
+
+From IDDD
+
+    Learn how to understand the characteristics of a domain concept to model as a Value.
+    See how to leverage Value Objects to minimize integration complexity.
+    Examine the use of domain Standard Types expressed as Values.
+    Consider how SaaSOvation learned the importance of Values.
+    Learn how the SaaSOvation teams tested, implemented, and persisted their Value types.
+
+//TODO replace the chapter roadmap with better guidelines
 
 ## Interesting Akka Patterns and References
 
