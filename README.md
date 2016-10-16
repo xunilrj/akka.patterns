@@ -131,6 +131,57 @@ From IDDD
 
 //TODO replace the chapter roadmap with better guidelines
 
+## CQRS
+
+Why CQRS?
+From [IDDD]
+
+    It can be difficult to query from Repositories all the data users need to view.
+    This is especially so when user experience design creates views of data that
+    cuts across a number of Aggregate types and instances. The more sophisticated 
+    your domain, the more this situation tends to occur.
+    Using only Repositories to solve this can be less than desirable. We could require
+    clients to use multiple Repositories to get all the necessary Aggregate instances,
+    then assemble just what’s needed into a Data Transfer Object (DTO) [Fowler, P of EAA].
+    Or we could design specialized finders on various Repositories to gather the disjointed
+    data using a single query. If these solutions seem unsuitable, perhaps we should instead
+    compromise on user experience design, making views rigidly adhere to the model’
+    s Aggregate boundaries. Most would agree that in the long run a mechanical and spartan user
+    interface won’t suffice.
+    Is there an altogether different way to map domain data to views? The answer lies in the
+    oddly named architecture pattern CQRS [Dahan, CQRS; Nijof, CQRS]. It is the result of pushing
+    a stringent object (or component) design principle, command-query separation (CQS), up to
+    an architecture pattern.
+    This principle, devised by Bertrand Meyer, asserts the following:
+        Every method should be either a command that performs an
+        action, or a query that returns data to the caller, but
+        not both. In other words, asking a question should not change
+        the answer. More formally, methods should return a value only 
+        if they are referentially transparent and hence possess no
+        side effects. [Wikipedia, CQS]
+        
+## Event Sourcing
+
+From IDDD:
+
+    There are varying definitions of Event Sourcing, so some clarification is fitting.
+    We are discussing the use where every operational command executed on any given
+    Aggregate instance in the domain model will publish at least one Domain Event that
+    describes the execution outcome. Each of the events is saved to an Event Store (8)
+    in the order in which it occurred. When each Aggregate is retrieved from its
+    Repository, the instance is reconstituted by playing back the Events in the order
+    in which they previously occurred
+
+## Long Process
+
+From IDDD:
+
+    Long-Running Processes, aka Sagas
+    A Long-Running Process is sometimes called a Saga, but depending on your background that
+    name may collide with a preexisting pattern. An early description of Sagas is presented 
+    in [Garcia-Molina & Salem].
+    //IMPROVE description
+
 ## Interesting Akka Patterns and References
 
 ### Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
