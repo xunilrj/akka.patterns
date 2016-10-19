@@ -16,7 +16,8 @@ namespace SomeBank.Accounts.AkkaNet.Actors
             {
                 var tmsg = message as CreateAccountCommand;
 
-                var aggregateRoot = Context.ActorOf(AccountActor.Props(), tmsg.Name);
+                var accountActorProps = AccountActor.Props(tmsg.Name);
+                var aggregateRoot = Context.ActorOf(accountActorProps, tmsg.Name);
                 aggregateRoot.Forward(message);
             }
             else if (message is TransferBetweenAccountsCommand)

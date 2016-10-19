@@ -1,24 +1,28 @@
-﻿using Akka.Actor;
+﻿using System;
+using Akka.Actor;
 using Chessie.ErrorHandling.CSharp;
 using SomeBank.AkkaNet.Actors;
 using static SomeBank.Accounts.Domain;
 
 namespace SomeBank.Accounts.AkkaNet.Actors
 {
-    class AccountActor : AggregateRootActor
+    class AccountActor : AggregateRootActor<Account.T>
     {
-        public static Props Props()
+        string Id;
+        public override string PersistenceId => Id;
+
+        public static Props Props(string accountId)
         {
-            return Akka.Actor.Props.Create<AccountActor>();
+            return Akka.Actor.Props.Create<AccountActor>(accountId);
         }
-
-        Account.T Data;
-
-        public AccountActor()
+        
+        public AccountActor(string accountId)
         {
-            Receive<CreateAccountCommand>(x => Handle(x));
-            Receive<TransferBetweenAccountsCommand>(x => Handle(x));
-            Receive<TransferConfirmation>(x => Handle(x));
+            Id = accountId;
+
+            Command<CreateAccountCommand>(x => Handle(x));
+            Command<TransferBetweenAccountsCommand>(x => Handle(x));
+            Command<TransferConfirmation>(x => Handle(x));
         }
 
         private void Handle(CreateAccountCommand command)
@@ -28,6 +32,8 @@ namespace SomeBank.Accounts.AkkaNet.Actors
             if(result.IsOk)
             {
                 Data = result.SucceededWith();
+
+                SaveSnapshot(Data);
             }
             else
             {
@@ -48,6 +54,23 @@ namespace SomeBank.Accounts.AkkaNet.Actors
             {
                 StartTranferFromSource(command);
             }
+        }
+
+        private void Handle(TransferConfirmation command)
+        {
+            var result = Account.AcceptTransferTo(command.Id, Data);
+
+            if(result.IsOk)
+            {
+                Data = result.SucceededWith();
+            }
+            else
+            {
+                //TODO Samething as error 400
+                //Sender.Tell()
+            }
+
+            Context.Log(x => x.Info("{Actor} - Transfer Accepted.", Self.Path));
         }
 
         private void StartTranferFromSource(TransferBetweenAccountsCommand command)
@@ -103,21 +126,6 @@ namespace SomeBank.Accounts.AkkaNet.Actors
             return Data.Name == command.Source;
         }
 
-        private void Handle(TransferConfirmation command)
-        {
-            var result = Account.AcceptTransferTo(command.Id, Data);
 
-            if(result.IsOk)
-            {
-                Data = result.SucceededWith();
-            }
-            else
-            {
-                //TODO Samething as error 400
-                //Sender.Tell()
-            }
-
-            Context.Log(x => x.Info("{Actor} - Transfer Accepted.", Self.Path));
-        }
     }
 }

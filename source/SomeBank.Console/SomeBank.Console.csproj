@@ -41,6 +41,22 @@
       <HintPath>..\packages\Akka.Logger.Serilog.1.1.2\lib\net45\Akka.Logger.Serilog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Akka.Persistence, Version=1.1.2.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Persistence.1.1.2.30-beta\lib\net45\Akka.Persistence.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Akka.Serialization.Wire, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Serialization.Wire.1.1.2.30-beta\lib\net45\Akka.Serialization.Wire.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers.Serialization, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -69,6 +85,10 @@
       <HintPath>..\packages\Topshelf.4.0.2\lib\net452\Topshelf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Wire, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wire.0.7.1\lib\net45\Wire.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Domains\DomainsActor.cs" />
@@ -84,6 +104,10 @@
     <ProjectReference Include="..\SomeBank.Accounts.AkkaNet\SomeBank.Accounts.AkkaNet.csproj">
       <Project>{db8356b9-aedc-4ace-b8f2-859c30eeecf3}</Project>
       <Name>SomeBank.Accounts.AkkaNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SomeBank.Accounts\SomeBank.Accounts.fsproj">
+      <Project>{bcbe4fd9-30e0-4196-a45e-80d19631e50f}</Project>
+      <Name>SomeBank.Accounts</Name>
     </ProjectReference>
     <ProjectReference Include="..\SomeBank.AkkaNet\SomeBank.AkkaNet.csproj">
       <Project>{40AE9C50-7C3B-4840-A46D-74ECBC4B6605}</Project>

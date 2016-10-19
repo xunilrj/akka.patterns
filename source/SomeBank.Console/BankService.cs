@@ -20,7 +20,40 @@ namespace SomeBank.Console
                 .CreateLogger();
             Serilog.Log.Logger = logger;
 
-            ActorSystem = ActorSystem.Create("BankSystem", "akka { loglevel=INFO,  loggers=[\"Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog\"]}");
+            ActorSystem = ActorSystem.Create("BankSystem", @"akka
+{
+    loglevel=INFO,
+    loggers=[""Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog""]
+
+    actor {
+        serializers {
+            //wire = ""Akka.Serialization.WireSerializer, Akka.Serialization.Wire""
+            //fsharprecord = ""SomeBank.AkkaNet.Serialization.FSharpRecordSerializer, SomeBank.AkkaNet""
+        }
+        serialization-bindings {
+            //""System.Object"" = wire
+            //""SomeBank.Accounts.Domain.Account.T, SomeBank.Accounts"" = fsharprecord
+        }
+     persistence {
+            journal {
+                plugin = ""akka.persistence.journal.inmem""
+                inmem {
+                    class=""Akka.Persistence.Journal.MemoryJournal, Akka.Persistence""
+                    plugin-dispatcher = ""akka.actor.default-dispatcher""
+                }
+            }
+            snapshot-store {
+                plugin = ""akka.persistence.snapshot - store.local""
+                local {
+                    class = ""Akka.Persistence.Snapshot.LocalSnapshotStore, Akka.Persistence""
+                    plugin-dispatcher = ""akka.persistence.dispatchers.default-plugin-dispatcher""
+                    stream-dispatcher = ""akka.persistence.dispatchers.default-stream-dispatcher""
+                    dir = ""snapshots""
+                }
+            }
+        }
+    }
+}");
             //var greeter = System.ActorOf<ProductActor>("Product01");
             //greeter.Tell(new ChangeProductPriceCommand(19.99));
 
@@ -39,7 +72,7 @@ namespace SomeBank.Console
                 Application.Tell(command);
             }
 
-           
+
             System.Threading.Thread.Sleep(1000);
 
             {
