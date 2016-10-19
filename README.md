@@ -1,21 +1,237 @@
-# akka.patterns
-A sandbox of akka patterns
+# Akka.NET sandbox
 
-## From Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
+Example of application built using Akka.net. Please Expect WIP code-quality.
 
-Workers Actors
+## Stack
+
+### Frontend  
+Still missing
+
+### Backend  
+C#  
+Topshelf  
+Akka.Net
+Serilog  
+
+### Domain Model  
+F#  
+Chessie
+
+### Persistence
+Still missing
+
+### Build + DevOps  
+Still missing
+
+## References
+
+Domain-Driven Design: Tackling Complexity in the Heart of Software  
+https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
+
+Implementing Domain-Driven Design [IDDD]  
+https://www.amazon.com/gp/product/0321834577/
+
+Reactive Messaging Patterns with the Actor Model: Applications and Integration in Scala and Akka  
+https://www.amazon.com/Reactive-Messaging-Patterns-Actor-Model/dp/0133846830/
+
+Effective Akka  
+https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076
+
+Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions  
+https://www.amazon.com/Enterprise-Integration-Patterns-Designing-Deploying/dp/0321200683
+
+Pattern-Oriented Software Architecture Volume 1: A System of Patterns  
+https://www.amazon.com/Pattern-Oriented-Software-Architecture-System-Patterns/dp/0471958697
+
+## DDD Patterns
+
+### Bounded Contexts
+
+From IDDD:
+
+    Shared Kernel: Sharing part of the model [...] can leverage design work or undermine it. [...] 
+    Keep the kernel small. [...] Define a continuous integration process [...]
+    
+    Customer-Supplier Development: When two teams are in an upstream-downstream relationship, 
+    where the upstream team may succeed interdependently of the fate of the downstream team, 
+    [...] Negotiate and budget tasks for downstream requirements so that everyone understands 
+    the commitment and schedule.
+
+    Conformist: When two development teams have an upstream/downstream relationship in which the 
+    upstream team has no motivation to provide for the downstream team’s needs, the downstream 
+    team is helpless. [...] The downstream [...] slavishly adhering to the model of the upstream team.
+    
+    Anticorruption Layer: [...]  when control or communication is not adequate to pull off a 
+    shared kernel, partner, or customer-supplier relationship [...] As a downstream client,
+    create an isolating layer to provide your system with functionality of the upstream system in
+    terms of your own domain model.
+    [...]
+    A Domain Service (7) can be defined in the downstream Context for each type of Anticorruption Layer. You may also put an Anticorruption Layer behind a Repository (12) interface. If using REST, a client Domain Service
+    implementation accesses a remote Open Host Service. Server responses produce representations
+    as a Published Language. The downstream Anticorruption Layer translates representations into
+    domain objects of its local Context.
+    
+    Open Host Service: Define a protocol that gives access to your subsystem as a set of services.
+    [...]
+    This pattern can be implemented as REST-based resources [...] We generally think of 
+    Open Host Service as a remote procedure call (RPC) API, but it can be implemented
+    using message exchange.
+    
+    Published Language: The translation between the models of two Bounded Contexts requires a 
+    common language. Use a well-documented shared language that can express the necessary domain
+    information as a common medium of communication [...]
+    [...]
+    This can be implemented [...] as an XML schema. When expressed with REST-based services,
+    the Published Language is rendered as representations of domain concepts. [...] 
+    It is also possible to render representations as Google Protocol Buffers. If you are
+    publishing Web user interfaces, it might also include HTML representations. One advantage 
+    to using REST is that each client can specify its preferred Published Language, 
+    and the resources render representations in the requested content type. REST also has the
+    advantage of producing hypermedia representations, which facilitates HATEOAS.
+    Hypermedia makes a Published Language very dynamic and interactive, enabling clients
+    to navigate to sets of linked resources. The Language may be published using standard 
+    and/or custom media types. A Published Language is also used in an Event-Driven
+    Architecture (4), where Domain Events (8) are delivered as messages to subscribing interested parties.
+    
+    Separate Ways: [...] If two sets of functionality have no significant relationship, they can
+    be completely cut loose from each other.
+    
+    Big Ball of Mud: [...] models are mixed and boundaries are inconsistent. Draw a boundary around 
+    the entire mess and designate it a Big Ball of Mud.
+    
+#### Difficulties that exist because of the loosed-coupled separation between Bounded Context
+
+From [IDDD]
+
+    For example, what would happen if in the [Bounded Context A] user mistakenly unassigns 
+    [User A1] from the [Role A1 in Bounded Context A]? Well, we receive an Event-carrying 
+    notification that indicates that fact, so we use [Service B in Bounded Context B] to disable
+    the [Role B in Bounded Context B] corresponding to [User A1]. Wait. Seconds later the user
+    realizes that she has unassigned the wrong user from the [Role A1 in Bounded Context A],
+    and that she should have unassigned [User A2] instead. So she quickly assigns [user A1] 
+    back to the role and unassigns [User A2]. [...] is everything actually OK?
+    We could be making a bad assumption about this use case. We are assuming that we receive
+    the notifications in the order in which they actually occurred in the [Bounded Context A].
+    Yet, things might not always work out so well. What would happen if, for whatever reason,
+    the notifications [were received in the reverse order]. [User A1] will be stuck in a disabled state,
+    and at best someone will have to patch the data in the [...] database, or the user will have to
+    play some tricks to get the right user reenabled.
+    This can happen, and ironically, it seems to always happen when we overlook the fact
+    that it could happen. So, how do we prevent this?
+
+for a solution see 
+Life beyond Distributed Transactions: an Apostate’s Opinion
+http://www.ics.uci.edu/~cs223/papers/cidr07p15.pdf
+
+In the author opininon the best way to scale an app is:
+
+    Scalable Apps Use Uniquely Identified “Entities”
+    Atomic Transactions Cannot Span Entities
+    Messages Are Addressed to Entities
+    Entities Manage Per-Partner State (“Activities”) 
+
+### Aggregates
+
+From IDDD
+
+    [...] model true invariants in consistency boundaries according to real business rules.
+    Consider the advantages of designing small Aggregates.
+    See why you should design Aggregates to reference other Aggregates by identity.
+    Discover the importance of using eventual consistency outside the Aggregate boundary.
+    Learn Aggregate implementation techniques, including Tell, Don’t Ask and Law of Demeter.
+    
+
+    
+### Entities
+
+From IDDD
+
+    Consider why Entities have their proper place when we need to model unique things.
+    See how unique identities may be generated for Entities.
+    Look in on a design session as a team captures its Ubiquitous Language (1) in Entity design.
+    Learn how you can express Entity roles and responsibilities.
+    See examples of how Entities can be validated and how to persist them to storage.
+    
+### Value Objects
+
+From IDDD
+
+    Learn how to understand the characteristics of a domain concept to model as a Value.
+    See how to leverage Value Objects to minimize integration complexity.
+    Examine the use of domain Standard Types expressed as Values.
+    Consider how SaaSOvation learned the importance of Values.
+    Learn how the SaaSOvation teams tested, implemented, and persisted their Value types.
+
+//TODO replace the chapter roadmap with better guidelines
+
+## CQRS
+
+Why CQRS?
+From [IDDD]
+
+    It can be difficult to query from Repositories all the data users need to view.
+    This is especially so when user experience design creates views of data that
+    cuts across a number of Aggregate types and instances. The more sophisticated 
+    your domain, the more this situation tends to occur.
+    Using only Repositories to solve this can be less than desirable. We could require
+    clients to use multiple Repositories to get all the necessary Aggregate instances,
+    then assemble just what’s needed into a Data Transfer Object (DTO) [Fowler, P of EAA].
+    Or we could design specialized finders on various Repositories to gather the disjointed
+    data using a single query. If these solutions seem unsuitable, perhaps we should instead
+    compromise on user experience design, making views rigidly adhere to the model’
+    s Aggregate boundaries. Most would agree that in the long run a mechanical and spartan user
+    interface won’t suffice.
+    Is there an altogether different way to map domain data to views? The answer lies in the
+    oddly named architecture pattern CQRS [Dahan, CQRS; Nijof, CQRS]. It is the result of pushing
+    a stringent object (or component) design principle, command-query separation (CQS), up to
+    an architecture pattern.
+    This principle, devised by Bertrand Meyer, asserts the following:
+        Every method should be either a command that performs an
+        action, or a query that returns data to the caller, but
+        not both. In other words, asking a question should not change
+        the answer. More formally, methods should return a value only 
+        if they are referentially transparent and hence possess no
+        side effects. [Wikipedia, CQS]
+        
+## Event Sourcing
+
+From IDDD:
+
+    There are varying definitions of Event Sourcing, so some clarification is fitting.
+    We are discussing the use where every operational command executed on any given
+    Aggregate instance in the domain model will publish at least one Domain Event that
+    describes the execution outcome. Each of the events is saved to an Event Store (8)
+    in the order in which it occurred. When each Aggregate is retrieved from its
+    Repository, the instance is reconstituted by playing back the Events in the order
+    in which they previously occurred
+
+## Long Process
+
+From IDDD:
+
+    Long-Running Processes, aka Sagas
+    A Long-Running Process is sometimes called a Saga, but depending on your background that
+    name may collide with a preexisting pattern. An early description of Sagas is presented 
+    in [Garcia-Molina & Salem].
+    //IMPROVE description
+
+## Interesting Akka Patterns and References
+
+### Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
+
+#### Workers Actors
 
     worker actors are meant for parallelization or separation of dangerous tasks into
     actors built specifically for that purpose, and the data upon which they will act is always
     provided to them. 
 
-Domain Actors
+#### Domain Actors
 
     Domain actors, introduced in the previous section, represent a live
     cache where the existence of the actors and the state they encapsulate are a view of the
     current state of the application.
     
-Extra Pattern 
+#### Extra Pattern 
 
     One of the most difficult tasks in asynchronous programming is trying to capture con‐
     text so that the state of the world at the time the task was started can be accurately
@@ -23,7 +239,7 @@ Extra Pattern
     Akka actors is a very simple and lightweight solution for capturing the context at the
     time the message was handled to be utilized when the tasks are successfully completed.
     
-Cameo Pattern
+#### Cameo Pattern
 
     Those are good reasons for pulling the type you’re creating with the Extra Pattern into
     a pre-defined type of actor, where you create an instance of that type for every message
@@ -39,7 +255,7 @@ Petabridge also have a post about this pattern, but have called it https://petab
     but trivially disposable actor whose only job is to carry out the operation successfully or die trying.
     These brave, disposable actors are Character Actors.
 
-Superviser-Only Pattern
+#### Superviser-Only Pattern
 
     introducing a layer of supervision between the
     [one hierarchy] and [another hierarchy of] children, as we see [below] [...] I can tailor
@@ -64,7 +280,7 @@ also see http://getakka.net/docs/concepts/supervision
     handling structure. If you try to do too much at one level, it will become hard to reason about,
     hence the recommended way in this case is to add a level of supervision.
 
-Sentinel Pattern
+#### Sentinel Pattern
 
     I call these kinds of actors
     “sentinels,” as they guard the system from falling out of synchrony with a known
@@ -96,7 +312,9 @@ https://blogs.msdn.microsoft.com/lucabol/2007/12/03/creating-an-immutable-value-
 Comparison between c# and f# for Immutability
 http://www.slideshare.net/ScottWlaschin/domain-driven-design-with-the-f-type-system-functional-londoners-2014
 
-## Stashing Patterns
+### Akka Documentation
+
+####  Stashing Patterns
 
 http://getakka.net/docs/working-with-actors/Stashing%20Messages TODO
 
@@ -158,17 +376,15 @@ Guaranteed Receiver Actor
     
 also see: http://skife.org/architecture/fault-tolerance/2009/12/31/bulkheads.html
 
-
-From 
-## Reactive Enterprise with Actor Model: Applications and Integration in Scala and Akka
+### Reactive Enterprise with Actor Model: Applications and Integration in Scala and Akka
 https://www.amazon.de/Reactive-Enterprise-Actor-Model-Applications/dp/0133846830
 
-Domain Supervision Actor
+#### Domain Supervision Actor
 
     The domainModel actor serves as parent and supervisor for categories of
     domain model of concepts [IDDD]
     
-Guaranteed Sender Actor
+#### Guaranteed Sender Actor
 
     By definition, when using Actor Model, messages are delivered to an actor at most once.
     For many uses this all works out just fine, especially when considering that any given
@@ -180,4 +396,3 @@ Guaranteed Sender Actor
     repeat message.
     
 also see: http://getakka.net/docs/persistence/at-least-once-delivery
-//TODO push the working code.
