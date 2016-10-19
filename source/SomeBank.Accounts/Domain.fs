@@ -131,3 +131,11 @@ module Account =
 //let nok41 = Account.create "AC001" 20.0
 //let nok42 = giveAC002100Bucks >>= nok41
 //let nok43 = giveAC002100Bucks >>= nok42
+
+//type RecordWithString = {Name:string}
+//type RecordWithMap = {
+//    SomeMap: Map<int,string>;
+//    SomeList: List<int>}
+//let createRecordWithMap = {
+//    SomeMap = Map.empty;
+//    SomeList = List.Empty }

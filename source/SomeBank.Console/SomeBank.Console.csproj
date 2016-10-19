@@ -37,12 +37,28 @@
       <HintPath>..\packages\Akka.1.1.2\lib\net45\Akka.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Akka.Cluster, Version=1.1.2.29, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Cluster.1.1.2\lib\net45\Akka.Cluster.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Akka.Cluster.Sharding, Version=1.1.2.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Cluster.Sharding.1.1.2.30-beta\lib\net45\Akka.Cluster.Sharding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Akka.Cluster.Tools, Version=1.1.2.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Cluster.Tools.1.1.2.30-beta\lib\net45\Akka.Cluster.Tools.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Akka.Logger.Serilog, Version=1.1.2.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Akka.Logger.Serilog.1.1.2\lib\net45\Akka.Logger.Serilog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Akka.Persistence, Version=1.1.2.30, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Akka.Persistence.1.1.2.30-beta\lib\net45\Akka.Persistence.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Akka.Remote, Version=1.1.2.29, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Remote.1.1.2\lib\net45\Akka.Remote.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Akka.Serialization.Wire, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -55,6 +71,10 @@
     </Reference>
     <Reference Include="Google.ProtocolBuffers.Serialization, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Helios, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Helios.2.1.2\lib\net45\Helios.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -82,11 +102,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Topshelf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Topshelf.4.0.2\lib\net452\Topshelf.dll</HintPath>
+      <HintPath>..\packages\Topshelf.4.0.3\lib\net452\Topshelf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Wire, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wire.0.7.1\lib\net45\Wire.dll</HintPath>
+      <HintPath>..\packages\Wire.0.8.1\lib\net45\Wire.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Akka.Cluster.Sharding;
 
 namespace SomeBank.AkkaNet.Actors
 {
@@ -19,7 +20,12 @@ namespace SomeBank.AkkaNet.Actors
         protected override void OnReceive(object message)
         {
             //Find the Bounded Context Manager
-            Context.ActorSelection("/user/domains/accounts").Tell(message);
+
+            var bc = ClusterSharding.Get(Context.System)
+                .ShardRegion("AccountsBoundedContextActor");
+            bc.Tell(message);
+            
+            //Context.ActorSelection("/user/domains/accounts").Tell(message);
 
             //Wait to this transaction to be completed than kill it
             Self.Tell(PoisonPill.Instance);

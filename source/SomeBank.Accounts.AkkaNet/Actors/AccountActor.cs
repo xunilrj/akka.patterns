@@ -6,7 +6,7 @@ using static SomeBank.Accounts.Domain;
 
 namespace SomeBank.Accounts.AkkaNet.Actors
 {
-    class AccountActor : AggregateRootActor<Account.T>
+    public class AccountActor : AggregateRootActor<Account.T>
     {
         string Id;
         public override string PersistenceId => Id;
@@ -33,7 +33,9 @@ namespace SomeBank.Accounts.AkkaNet.Actors
             {
                 Data = result.SucceededWith();
 
-                SaveSnapshot(Data);
+                //TODO Waiting bug to be closed
+                //https://github.com/AsynkronIT/Wire/issues/120
+                //SaveSnapshot(Data);
             }
             else
             {
