@@ -224,6 +224,14 @@ From IDDD:
     worker actors are meant for parallelization or separation of dangerous tasks into
     actors built specifically for that purpose, and the data upon which they will act is always
     provided to them. 
+    
+Petabridge also have a post about this pattern, but have called it https://petabridge.com/blog/top-akkadotnet-design-patterns/
+
+    The Character Actor Pattern is used when an application has some risky but critical operation to execute,
+    but needs to protect critical state contained in other actors and ensure that there are no negative side effects.
+    It’s often cheaper, faster, and more reliable to simply delegate these risky operations to a purpose-built,
+    but trivially disposable actor whose only job is to carry out the operation successfully or die trying.
+    These brave, disposable actors are Character Actors.
 
 #### Domain Actors
 
@@ -246,14 +254,6 @@ From IDDD:
     handled.
     
 Also See: https://www.javacodegeeks.com/2014/01/three-flavours-of-request-response-pattern-in-akka.html
-
-Petabridge also have a post about this pattern, but have called it https://petabridge.com/blog/top-akkadotnet-design-patterns/
-
-    The Character Actor Pattern is used when an application has some risky but critical operation to execute,
-    but needs to protect critical state contained in other actors and ensure that there are no negative side effects.
-    It’s often cheaper, faster, and more reliable to simply delegate these risky operations to a purpose-built,
-    but trivially disposable actor whose only job is to carry out the operation successfully or die trying.
-    These brave, disposable actors are Character Actors.
 
 #### Superviser-Only Pattern
 
