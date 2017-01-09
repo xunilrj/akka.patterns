@@ -396,3 +396,12 @@ https://www.amazon.de/Reactive-Enterprise-Actor-Model-Applications/dp/0133846830
     repeat message.
     
 also see: http://getakka.net/docs/persistence/at-least-once-delivery
+
+### BlackHole Pattern
+
+    The BlackHoleActor is a special-purpose actor that will not respond to anything. No matter
+    what message you tell the BlackHoleActor, it will not respond. BlackHoleActor is perfect
+    for testing failure conditions. Common failure conditions are when an actor or
+    service dies, or an operation times out.
+
+https://petabridge.com/blog/how-to-unit-test-akkadotnet-actors-akka-testkit/
