@@ -217,6 +217,7 @@ From IDDD:
 
 ## Interesting Akka Patterns and References
 
+
 ### Effective Akka (https://www.amazon.com/Effective-Akka-Jamie-Allen/dp/1449360076)
 
 #### Workers Actors
@@ -225,6 +226,7 @@ From IDDD:
     actors built specifically for that purpose, and the data upon which they will act is always
     provided to them. 
     
+
 Petabridge also have a post about this pattern, but have called it https://petabridge.com/blog/top-akkadotnet-design-patterns/
 
     The Character Actor Pattern is used when an application has some risky but critical operation to execute,
@@ -273,12 +275,21 @@ Also See: https://www.javacodegeeks.com/2014/01/three-flavours-of-request-respon
     +--+------+     +-------+--+         +----+-----+         +--------+--+
     | child 1 |     | child 2  |         | child 3  |         | child 4   |
     +---------+     +----------+         +----------+         +-----------+
-    
+
+Backoff Superviser Pattern
+
+http://doc.akka.io/docs/akka/2.4.3/general/supervision.html#Delayed_restarts_with_the_BackoffSupervisor_pattern
+
+    Provided as a built-in pattern the akka.pattern.BackoffSupervisor implements the so-called 
+    exponential backoff supervision strategy, starting a child actor again when it fails, each
+    time with a growing time delay between restarts.
+
 also see http://getakka.net/docs/concepts/supervision
 
     At this point it is vital to understand that supervision is about forming a recursive fault
     handling structure. If you try to do too much at one level, it will become hard to reason about,
     hence the recommended way in this case is to add a level of supervision.
+
 
 #### Sentinel Pattern
 
