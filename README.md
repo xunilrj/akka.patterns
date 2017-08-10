@@ -341,10 +341,10 @@ To allow such operation without distributed transaction, one can use the followi
 1 - With just one operation on the Source AccountActor:  
 1.1 - Decrease the account balance (the desired operation)  
 1.2 - Insert that there is an operation in progress (pending operation storage)  
-2 - Persist Source AccountActor;
-2.1 - From this point it is guaranteed that the operation will finish;
-3 - Create a TransferActor to communicate with Destination AccountActor; 
-3.1 - AccountActor must have a mechanism to guarantee that for every operation in progress exist one associated TransferActor (Cameo Pattern);
+2 - Persist Source AccountActor;  
+2.1 - From this point it is guaranteed that the operation will finish;  
+3 - Create a TransferActor to communicate with Destination AccountActor;   
+3.1 - AccountActor must have a mechanism to guarantee that for every operation in progress exist one associated TransferActor (Cameo Pattern);  
 4 - TransferActor must send the message to the Destination AccountActor "n" times following some kind of pattern (every x seconds, for example);  
 4.1 - If after n transient errors or a non-transient error, the actor can enter in a human-attention-needed state (maybe the destination account does not exist);  
 5 - TransferActor enter in Wait-for-confirmation state;  
